@@ -3,7 +3,7 @@ version: "1.1"
 endpoints:
   - name: "REST API"
     displayName: "REST API"
-    porrt: 8000
+    port: 8000
     service:
       basepath: /
       port: 8000
