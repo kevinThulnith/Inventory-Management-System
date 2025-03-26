@@ -7,8 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "host": "vite --host"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@vercel/speed-insights": "^1.2.0",
