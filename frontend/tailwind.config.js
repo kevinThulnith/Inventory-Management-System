@@ -8,6 +8,7 @@ export default {
         ms: "1200px",
         ss: "650px",
         xs: "500px",
+        pa: "380px",
       },
     },
   },

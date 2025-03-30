@@ -129,7 +129,7 @@ function Home() {
   return (
     <motion.div
       className="p-4 ss:p-6 grid grid-cols-1 ss:grid-cols-2 ms:grid-cols-3 gap-4 ss:gap-6 
-                 bg-gray-100 shadow-xl rounded-2xl w-full xs:w-[500px] ss:w-[650px] 
+                 bg-gray-100 shadow-xl rounded-2xl ps:w-[360px] xs:w-[500px] ss:w-[650px] 
                  ms:w-[900px] mx-auto overflow-y-auto ss:h-full h-[650px]"
       initial="hidden"
       animate="visible"

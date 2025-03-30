@@ -75,7 +75,7 @@ function Category() {
 
   return (
     <motion.div
-      className="bg-white rounded-lg shadow-md sm:p-6 p-4 ss:w-[600px] form-container w-[380px] mx-auto overflow-y-auto ms:h-[720px] h-[650px]"
+      className="bg-white rounded-lg shadow-md sm:p-6 p-4 ss:w-[600px] w-[360px] mx-auto overflow-y-auto ms:h-[720px] h-[650px]"
       initial="hidden"
       animate="visible"
       variants={animations.container}
