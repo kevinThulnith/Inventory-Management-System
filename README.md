@@ -7,7 +7,7 @@
 
 # 🚀 Inventory Management System
 
-A full-stack Inventory Management System with **User Authentication** and **Authorization**. Built with **Django REST Framework** for the backend and **Vite + React + Tailwind CSS** for the frontend. Fully _**Optimized Code**_ with _**Responsive Seding**_.
+A full-stack Inventory Management System with **User Authentication** and **Authorization**. Built with **Django REST Framework** for the backend and **Vite + React + Tailwind CSS** for the frontend. Fully **Optimized Code** with **Responsive desing**.
 
 <img src="photo/Presentation.png">
 
