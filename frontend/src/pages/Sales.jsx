@@ -1,10 +1,12 @@
+import { FaArrowRightArrowLeft, FaAnglesRight } from "react-icons/fa6";
 import LoadingIndicator from "../components/LoadingIndicator";
-import { FaArrowRightArrowLeft } from "react-icons/fa6";
+import animations from "../components/animation";
 import { FaChevronDown } from "react-icons/fa";
 import { FaTrashCan } from "react-icons/fa6";
 import { useState, useEffect } from "react";
 import { IoMdList } from "react-icons/io";
 import { FaPlus } from "react-icons/fa6";
+import { motion } from "framer-motion";
 import api from "../api";
 
 function Sales() {
@@ -108,16 +110,31 @@ function Sales() {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md flex col-span-2 gap-6">
-      <div className="md:w-[550px] h-[670px]">
-        <h2 className="text-3xl font-semibold text-gray-500 p-3 flex items-center gap-3">
+    <motion.div
+      className="bg-white rounded-lg shadow-md sm:p-6 p-4 flex ms:flex-row flex-col ms:gap-6 gap-2 ms:w-[1150px] ss:w-[600px] form-container w-[380px] mx-auto overflow-y-auto ms:h-[720px] h-[650px]"
+      initial="hidden"
+      animate="visible"
+      variants={animations.container}
+    >
+      <motion.div className="flex-1" variants={animations.item}>
+        <motion.h2
+          className="ss:text-3xl text-2xl font-semibold text-gray-500 ms:p-3 flex items-center gap-3"
+          variants={animations.item}
+        >
           Add Sales
-          <FaArrowRightArrowLeft />
-        </h2>
-        <span className="text-sm text-gray-600 ml-3">
+          <FaArrowRightArrowLeft className="ss:text-3xl text-2xl" />
+        </motion.h2>
+        <motion.span
+          className="text-sm text-gray-600"
+          variants={animations.item}
+        >
           Fill in the form to add a sale
-        </span>
-        <form className="mt-6 space-y-6 p-4" onSubmit={handleSubmit}>
+        </motion.span>
+        <motion.form
+          className="xs:mt-6 mt-2 space-y-6 xs:p-4 p-2"
+          onSubmit={handleSubmit}
+          variants={animations.item}
+        >
           <div>
             <label
               htmlFor="customer"
@@ -155,50 +172,52 @@ function Sales() {
           <h3 className="block text-sm font-medium text-gray-600">
             Selected Procucts
           </h3>
-          <div className="bg-gray-100 w-[539px] h-[250px] overflow-x-auto rounded-lg p-3">
-            {selectedProducts.map((product, index) => (
-              <div key={index} className="flex gap-2 mb-4">
-                <select
-                  required
-                  value={product.productId}
-                  onChange={(e) =>
-                    handleProductChange(index, "productId", e.target.value)
-                  }
-                  className="bg-slate-50 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none"
-                >
-                  <option value="" className="text-gray-500">
-                    Select a product
-                  </option>
-                  {products.map((prod) => (
-                    <option key={prod.id} value={prod.id}>
-                      {prod.name}
+          <div style={{ overflowX: "auto" }}>
+            <div className="bg-gray-100 w-[520px] h-[250px] overflow-x-auto rounded-lg p-3">
+              {selectedProducts.map((product, index) => (
+                <div key={index} className="flex gap-2 mb-4">
+                  <select
+                    required
+                    value={product.productId}
+                    onChange={(e) =>
+                      handleProductChange(index, "productId", e.target.value)
+                    }
+                    className="bg-slate-50 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none"
+                  >
+                    <option value="" className="text-gray-500">
+                      Select a product
                     </option>
-                  ))}
-                </select>
-                <input
-                  required
-                  type="number"
-                  placeholder="amm"
-                  value={product.amount}
-                  onChange={(e) =>
-                    handleProductChange(index, "amount", e.target.value)
-                  }
-                  className="block w-[100px] px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none"
-                />
-                <span className="block w-[180px] px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none">
-                  {product.price}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => handleRemoveProduct(index)}
-                  className="px-4 py-2 bg-red-500 text-white rounded-md"
-                >
-                  <FaTrashCan />
-                </button>
-              </div>
-            ))}
+                    {products.map((prod) => (
+                      <option key={prod.id} value={prod.id}>
+                        {prod.name}
+                      </option>
+                    ))}
+                  </select>
+                  <input
+                    required
+                    type="number"
+                    placeholder="amm"
+                    value={product.amount}
+                    onChange={(e) =>
+                      handleProductChange(index, "amount", e.target.value)
+                    }
+                    className="block w-[100px] px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none"
+                  />
+                  <span className="block w-[180px] px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none">
+                    {product.price}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveProduct(index)}
+                    className="px-4 py-2 bg-red-500 text-white rounded-md"
+                  >
+                    <FaTrashCan />
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="flex items-center justify-between">
+          <div className="xs:flex xs:items-center xs:justify-between">
             <div className="mb-4">
               <span className="text-base">Subtotal: {subtotal}</span>
             </div>
@@ -216,54 +235,56 @@ function Sales() {
           >
             Submit Sale
           </button>
-        </form>
-      </div>
-      <div className="md:w-[550px]">
+        </motion.form>
+      </motion.div>
+      <motion.div className="flex-1" variants={animations.item}>
         <h2 className="text-3xl font-semibold text-gray-500 p-3 flex items-center gap-3">
           View Sales <IoMdList />
         </h2>
-        <div className="bg-slate-100 mt-3 rounded-xl mx-auto w-[540px] h-[590px]">
-          <div className="bg-blue-600 w-full h-[45px] rounded-t-xl flex columns-4">
-            <div className="flex-[0.5] text-white text-center pt-3 border-r-2 border-white font-semibold">
-              Id
-            </div>
-            <div className="flex-1 text-white text-center pt-3 border-r-2 border-white font-semibold">
-              Customer
-            </div>
-            <div className="flex-1 text-white text-center pt-3 border-r-2 border-white font-semibold">
-              Date
-            </div>
-            <div className="flex-1 text-white text-center pt-3 font-semibold">
-              Total (Rs)
-            </div>
-          </div>
-          <div className="w-full h-[544px] rounded-b-xl overflow-x-auto">
-            {sales.map((sale) => (
-              <div
-                key={sale.id}
-                className={`${
-                  sale.id !== 1 ? "border-t-2 border-gray-300" : ""
-                } flex columns-4 h-[45px] w-full`}
-              >
-                <div className="flex-[0.5] text-gray-700 text-center pt-2 border-r-2 border-gray-300">
-                  {sale.id}
-                </div>
-                <div className="flex-1 text-gray-700 indent-3 pt-2 border-r-2 border-gray-300">
-                  {sale.customer_name}
-                </div>
-                <div className="flex-1 text-gray-700 indent-3 pt-2 border-r-2 border-gray-300 truncate">
-                  {new Date(sale.created_at).toLocaleDateString()}
-                </div>
-                <div className="flex-1 text-gray-700 text-center pt-2">
-                  {sale.total}
-                </div>
+        <motion.div style={{ overflowX: "auto" }} variants={animations.item}>
+          <div className="bg-slate-100 mt-3 rounded-xl mx-auto w-[540px] h-[590px]">
+            <div className="bg-blue-600 w-full h-[45px] rounded-t-xl flex columns-4">
+              <div className="flex-[0.5] text-white text-center pt-3 border-r-2 border-white font-semibold">
+                Id
               </div>
-            ))}
+              <div className="flex-1 text-white text-center pt-3 border-r-2 border-white font-semibold">
+                Customer
+              </div>
+              <div className="flex-1 text-white text-center pt-3 border-r-2 border-white font-semibold">
+                Date
+              </div>
+              <div className="flex-1 text-white text-center pt-3 font-semibold">
+                Total (Rs)
+              </div>
+            </div>
+            <div className="w-full h-[544px] rounded-b-xl overflow-x-auto">
+              {sales.map((sale) => (
+                <div
+                  key={sale.id}
+                  className={`${
+                    sale.id !== 1 ? "border-t-2 border-gray-300" : ""
+                  } flex columns-4 h-[45px] w-full`}
+                >
+                  <div className="flex-[0.5] text-gray-700 text-center pt-2 border-r-2 border-gray-300">
+                    {sale.id}
+                  </div>
+                  <div className="flex-1 text-gray-700 indent-3 pt-2 border-r-2 border-gray-300">
+                    {sale.customer_name}
+                  </div>
+                  <div className="flex-1 text-gray-700 indent-3 pt-2 border-r-2 border-gray-300 truncate">
+                    {new Date(sale.created_at).toLocaleDateString()}
+                  </div>
+                  <div className="flex-1 text-gray-700 text-center pt-2">
+                    {sale.total}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
       {loading && <LoadingIndicator />}
-    </div>
+    </motion.div>
   );
 }
 

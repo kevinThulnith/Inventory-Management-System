@@ -9,7 +9,7 @@
 
 A full-stack Inventory Management System with **User Authentication** and **Authorization**. Built with **Django REST Framework** for the backend and **Vite + React + Tailwind CSS** for the frontend. Fully _**Optimized Code**_ with _**Responsive Seding**_.
 
-<img src="photo/Presentation.jpg">
+<img src="photo/Presentation.png">
 
 ## ✨ Features
 

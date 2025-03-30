@@ -1,13 +1,41 @@
-import { FaBarsStaggered } from "react-icons/fa6";
-import { FaChevronUp } from "react-icons/fa";
+import { FaBarsStaggered, FaAnglesRight } from "react-icons/fa6";
+import { useState, useCallback, memo } from "react";
 import { NavLink } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
 import viteLogo from "../assets/vite.png";
-import { useState } from "react";
+
+// !Navigation items configuration
+const navItems = [
+  { path: "/Customer", label: "Customers" },
+  { path: "/Supplier", label: "Suppliers" },
+  { path: "/Category", label: "Categories" },
+  { path: "/Product", label: "Products" },
+  { path: "/Sales", label: "Sales" },
+  { path: "/Purchase", label: "Purchase" },
+];
+
+// !Memoized NavLink component for better performance
+const NavItem = memo(({ to, label, onClick, className, icon }) => (
+  <NavLink to={to} className={className} onClick={onClick}>
+    {label}
+    {icon && icon}
+  </NavLink>
+));
 
 function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // !State to manage menu visibility
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen); // !Function to toggle menu visibility
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = useCallback(() => setIsMenuOpen((prev) => !prev), []);
+  const closeMenu = useCallback(() => setIsMenuOpen(false), []);
+
+  const getNavLinkClass = useCallback(
+    ({ isActive }) => `
+    block py-2 ${
+      isActive ? "text-black" : "hover:text-gray-700 duration-200 ease-in-out"
+    }
+  `,
+    []
+  );
 
   return (
     <div className="fixed top-0 left-0 z-50 bg-white shadow-md w-full py-4">
@@ -23,106 +51,72 @@ function Navbar() {
               letterSpacing: "0.5px",
             }}
           >
-            Inventory Management System
+            <span className="hidden xs:inline">
+              Inventory Management System
+            </span>
+            <span className="xs:hidden">IMS 3.0</span>
           </NavLink>
         </div>
 
+        {/* Mobile Menu Button */}
         <button
           onClick={toggleMenu}
-          className="md:hidden text-gray-700 outline-none border-none text-2xl"
+          className="ls:hidden text-gray-700 outline-none border-none text-2xl"
         >
-          {isMenuOpen ? <FaChevronUp /> : <FaBarsStaggered />}
+          {isMenuOpen ? <FaAnglesRight /> : <FaBarsStaggered />}
         </button>
 
-        {/* !Menu */}
+        {/* Mobile Menu */}
         <div
-          className={`${
-            isMenuOpen ? "block" : "hidden"
-          } md:flex md:space-x-4 absolute md:static bg-white w-full md:w-auto left-0 top-16 py-4 md:py-0 shadow-md md:shadow-none`}
+          className={`
+            fixed top-16 right-0 h-[calc(100vh-4rem)] xs:w-[450px] w-[80%] bg-white shadow-lg 
+            transform transition-transform duration-300 ease-in-out
+            ${isMenuOpen ? "translate-x-0" : "translate-x-full"}
+            ls:hidden flex flex-col p-4
+          `}
           style={{ color: "#999", fontWeight: 500, fontSize: "17px" }}
         >
-          <NavLink
-            to="/Customer"
-            className={({ isActive }) =>
-              `block md:inline-block py-2 mx-4 md:mx-0 ${
-                isActive ? "text-black" : "hover:text-gray-700"
-              }`
-            }
-            onClick={() => setIsMenuOpen(false)} // Close menu on link click
-          >
-            Customers
-          </NavLink>
-          <NavLink
-            to="/Supplier"
-            className={({ isActive }) =>
-              `block md:inline-block py-2 mx-4 md:mx-0 ${
-                isActive ? "text-black" : "hover:text-gray-700"
-              }`
-            }
-            onClick={() => setIsMenuOpen(false)} // Close menu on link click
-          >
-            Suppliers
-          </NavLink>
-          <NavLink
-            to="/Category"
-            className={({ isActive }) =>
-              `block md:inline-block py-2 mx-4 md:mx-0 ${
-                isActive ? "text-black" : "hover:text-gray-700"
-              }`
-            }
-            onClick={() => setIsMenuOpen(false)} // Close menu on link click
-          >
-            Categories
-          </NavLink>
-          <NavLink
-            to="/Product"
-            className={({ isActive }) =>
-              `block md:inline-block py-2 mx-4 md:mx-0 ${
-                isActive ? "text-black" : "hover:text-gray-700"
-              }`
-            }
-            onClick={() => setIsMenuOpen(false)} // Close menu on link click
-          >
-            Products
-          </NavLink>
-          <NavLink
-            to="/Sales"
-            className={({ isActive }) =>
-              `block md:inline-block py-2 mx-4 md:mx-0 ${
-                isActive ? "text-black" : "hover:text-gray-700"
-              }`
-            }
-            onClick={() => setIsMenuOpen(false)} // Close menu on link click
-          >
-            Sales
-          </NavLink>
-          <NavLink
-            to="/Purchase"
-            className={({ isActive }) =>
-              `block md:inline-block py-2 mx-4 md:mx-0 ${
-                isActive ? "text-black" : "hover:text-gray-700"
-              }`
-            }
-            onClick={() => setIsMenuOpen(false)} // Close menu on link click
-          >
-            Purchase
-          </NavLink>
-          <NavLink
+          {navItems.map(({ path, label }) => (
+            <NavItem
+              key={path}
+              to={path}
+              label={label}
+              className={getNavLinkClass}
+              onClick={closeMenu}
+            />
+          ))}
+          <NavItem
             to="/logout"
-            className={({ isActive }) =>
-              `block md:inline-block py-2 mx-4 md:mx-0 ${
-                isActive ? "text-black" : "hover:text-gray-700"
-              }`
-            }
-            onClick={() => setIsMenuOpen(false)} // Close menu on link click
-          >
-            Logout
-            <FiLogOut className="inline-block ml-2" />
-          </NavLink>
+            label="Logout"
+            className={getNavLinkClass}
+            onClick={closeMenu}
+            icon={<FiLogOut className="inline-block ml-2" />}
+          />
+        </div>
+
+        {/* Desktop Menu */}
+        <div
+          className="ls:flex ls:space-x-4 hidden"
+          style={{ color: "#999", fontWeight: 500, fontSize: "17px" }}
+        >
+          {navItems.map(({ path, label }) => (
+            <NavItem
+              key={path}
+              to={path}
+              label={label}
+              className={getNavLinkClass}
+            />
+          ))}
+          <NavItem
+            to="/logout"
+            label="Logout"
+            className={getNavLinkClass}
+            icon={<FiLogOut className="inline-block ml-2" />}
+          />
         </div>
       </div>
     </div>
   );
 }
 
-export default Navbar;
+export default memo(Navbar);

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import api from "../api";
 import { motion } from "framer-motion";
 import {
   FiUsers,
@@ -11,6 +10,35 @@ import {
   FiShoppingCart,
 } from "react-icons/fi";
 import { FaAnglesRight } from "react-icons/fa6";
+import api from "../api";
+
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delayChildren: 0.2,
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const sectionVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeInOut" },
+  },
+};
+
+const itemVariants = {
+  hover: {
+    scale: 1.05,
+    transition: { duration: 0.2 },
+  },
+};
 
 function Home() {
   const [customers, setCustomers] = useState([]);
@@ -52,25 +80,6 @@ function Home() {
     };
     fetchData();
   }, []);
-
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeInOut",
-      },
-    },
-  };
-
-  const itemVariants = {
-    hover: {
-      scale: 1.05,
-      transition: { duration: 0.2 },
-    },
-  };
 
   const sectionData = [
     {
@@ -119,41 +128,36 @@ function Home() {
 
   return (
     <motion.div
-      className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6 bg-gray-100 shadow-xl rounded-2xl h-full md:w-[900px]"
+      className="p-4 ss:p-6 grid grid-cols-1 ss:grid-cols-2 ms:grid-cols-3 gap-4 ss:gap-6 
+                 bg-gray-100 shadow-xl rounded-2xl w-full xs:w-[500px] ss:w-[650px] 
+                 ms:w-[900px] mx-auto overflow-y-auto ss:h-full h-[650px]"
       initial="hidden"
       animate="visible"
-      variants={{
-        hidden: { opacity: 0 },
-        visible: {
-          opacity: 1,
-          transition: {
-            delayChildren: 0.2,
-            staggerChildren: 0.1,
-          },
-        },
-      }}
+      variants={containerVariants}
     >
       {sectionData.map((section) => (
         <motion.div
           key={section.title}
-          className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300"
+          className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg 
+                     transition-shadow duration-300"
           variants={sectionVariants}
         >
-          <div className="p-5">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-gray-800 flex items-center">
+          <div className="p-3 ss:p-5">
+            <div className="flex items-center justify-between mb-2 ss:mb-4">
+              <h3 className="text-base ss:text-lg font-semibold text-gray-800 flex items-center">
                 {section.title}
                 <span className="ml-2">
                   <section.icon className="text-gray-500" />
                 </span>
               </h3>
             </div>
-            <ul>
-              {section.data.map((item, index) => (
+
+            <ul className="space-y-1 ss:space-y-2">
+              {section.data.map((item) => (
                 <motion.li
-                  id={index}
                   key={item.id}
-                  className="text-gray-700 py-2 px-3 hover:bg-gray-50 rounded-md transition-colors duration-200"
+                  className="text-sm ss:text-base text-gray-700 py-1.5 ss:py-2 px-2 ss:px-3 
+                           hover:bg-gray-50 rounded-md transition-colors duration-200"
                   variants={itemVariants}
                   whileHover="hover"
                 >
@@ -163,16 +167,21 @@ function Home() {
                 </motion.li>
               ))}
               {section.data.length === 0 && (
-                <li className="text-gray-500 py-2 px-3">No data available.</li>
+                <li className="text-sm ss:text-base text-gray-500 py-1.5 ss:py-2 px-2 ss:px-3">
+                  No data available.
+                </li>
               )}
             </ul>
+
             {section.data.length > 0 && (
-              <div className="mt-4">
+              <div className="mt-3 ss:mt-4">
                 <Link
                   to={section.link}
-                  className="inline-block text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors duration-200"
+                  className="inline-flex items-center text-xs ss:text-sm text-blue-600 
+                           hover:text-blue-800 font-medium transition-colors duration-200"
                 >
-                  View All <FaAnglesRight className="inline" />
+                  View All
+                  <FaAnglesRight className="ml-1 text-xs ss:text-sm" />
                 </Link>
               </div>
             )}
