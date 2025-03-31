@@ -22,18 +22,17 @@ const formFields = [
 ];
 
 function Customer() {
+  const [loading, setLoading] = useState(false);
+  const [customers, setCustomers] = useState([]);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [formData, setFormData] = useState(initialFormState);
+  const [currentCustomerId, setCurrentCustomerId] = useState(null);
   const initialFormState = {
     name: "",
     phone: "",
     email: "",
     address: "",
   };
-
-  const [formData, setFormData] = useState(initialFormState);
-  const [customers, setCustomers] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [isUpdating, setIsUpdating] = useState(false);
-  const [currentCustomerId, setCurrentCustomerId] = useState(null);
 
   const getCustomers = useCallback(async () => {
     setLoading(true);
@@ -82,7 +81,7 @@ function Customer() {
         setCurrentCustomerId(id);
         setIsUpdating(true);
 
-        const containerElement = document.querySelector(".form-container");
+        const containerElement = document.getElementById("container");
         containerElement?.scrollTo({ top: 0, behavior: "smooth" });
       }
     },
@@ -120,6 +119,7 @@ function Customer() {
       className="bg-white rounded-lg shadow-md sm:p-6 p-4 flex ms:flex-row flex-col ms:gap-6 gap-2 ms:w-[1150px] ss:w-[600px] w-[360px] mx-auto overflow-y-auto ms:h-[620px] h-[650px]"
       initial="hidden"
       animate="visible"
+      id="container"
       variants={animations.container}
     >
       <motion.div className="flex-1" variants={animations.item}>

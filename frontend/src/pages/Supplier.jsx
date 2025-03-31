@@ -81,7 +81,7 @@ function Supplier() {
         setCurrentSupplierId(id);
         setIsUpdating(true);
 
-        const containerElement = document.querySelector(".form-container");
+        const containerElement = document.getElementById("container");
         containerElement?.scrollTo({ top: 0, behavior: "smooth" });
       }
     },
@@ -117,6 +117,7 @@ function Supplier() {
   return (
     <motion.div
       className="bg-white rounded-lg shadow-md sm:p-6 p-4 flex ms:flex-row flex-col ms:gap-6 gap-2 ms:w-[1150px] ss:w-[600px] w-[360px] mx-auto overflow-y-auto ms:h-[620px] h-[650px]"
+      id="container"
       initial="hidden"
       animate="visible"
       variants={animations.container}
