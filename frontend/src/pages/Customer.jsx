@@ -22,17 +22,17 @@ const formFields = [
 ];
 
 function Customer() {
-  const [loading, setLoading] = useState(false);
-  const [customers, setCustomers] = useState([]);
-  const [isUpdating, setIsUpdating] = useState(false);
-  const [formData, setFormData] = useState(initialFormState);
-  const [currentCustomerId, setCurrentCustomerId] = useState(null);
   const initialFormState = {
     name: "",
     phone: "",
     email: "",
     address: "",
   };
+  const [loading, setLoading] = useState(false);
+  const [customers, setCustomers] = useState([]);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [formData, setFormData] = useState(initialFormState);
+  const [currentCustomerId, setCurrentCustomerId] = useState(null);
 
   const getCustomers = useCallback(async () => {
     setLoading(true);
