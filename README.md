@@ -1,74 +1,76 @@
 [![Python IDLE](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=fff)](#)
 [![Django](https://img.shields.io/badge/Django-%23092E20.svg?logo=django&logoColor=white)](#)
+![DRF](https://img.shields.io/badge/Django_REST-FF1709?logo=django&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-000000?logo=JSON%20web%20tokens)
 [![Postgres](https://img.shields.io/badge/Postgres-%23316192.svg?logo=postgresql&logoColor=white)](#)
-[![NodeJS](https://img.shields.io/badge/Node.js-6DA55F?logo=node.js&logoColor=white)](#)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=fff)](#)
 [![React](https://img.shields.io/badge/React-%2320232a.svg?logo=react&logoColor=%2361DAFB)](#)
+![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white)
+![Axios](https://img.shields.io/badge/Axios-5A29E4?logo=axios&logoColor=white)
+[![NodeJS](https://img.shields.io/badge/Node.js-6DA55F?logo=node.js&logoColor=white)](#)
 
 # 🚀 Inventory Management System
 
-A full-stack Inventory Management System with **User Authentication** and **Authorization**. Built with **Django REST Framework** for the backend and **Vite + React + Tailwind CSS** for the frontend. Fully **Optimized Code** with **Responsive desing**.
+📦 **A Full-Stack Inventory Management Solution** with 🔐 **User Authentication** and **Authorization**. ✨ Built with **Django | Django REST Framework** for the backend and **Vite | React | Tailwind CSS** for the frontend. Fully ⚡ **Optimized Code** with 📱 **Fully Responsive**.
 
-<img src="photo/Presentation.png">
+![Tech Stack](photo/Presentation.png)
 
-## ✨ Features
+## 🌟 Key Features
 
-### User Authentication
+### 🔐 Authentication & Security
 
-- 👤 Register: Create a new user account.
-- 🔑 Login: Authenticate and access the system.
-- 🚪 Logout: Securely log out of the system.
+- 👤 **User Registration** - Create new accounts with validation
+- 🔑 **JWT Authentication** - Secure login/logout system
+- 🛡️ **Role-Based Access** - Protected routes & endpoints
 
 ### 📦 Product Management
 
-- ✅ Add, Update, List, Delete products
-- 🏷️ Product Categories (Organize products efficiently)
-- 📊 Stock Tracking (Keep an eye on inventory levels)
+- 🆕 **CRUD Operations** - Add/Edit/View/Delete products
+- 🏷️ **Smart Categorization** - Organize with nested categories
+- 📊 **Real-Time Inventory** - Track stock levels & alerts
 
-### Authorization
+### 💼 Business Operations
 
-- 🔒 Only the author of a product can edit or delete it.
+- 👥 **Customer Management** - Track purchases & history
+- 🏭 **Supplier Integration** - Manage procurement workflow
+- 💰 **Sales & Purchases** - Complete transaction tracking
 
-### 👥 Customer & Supplier Management
+### 🛠️ Advanced Functionality
 
-- 👤 Customers (Track customer details & purchase history)
-- Suppliers (Manage suppliers & procurement details)
+- 🔍 **Powerful Search** - Filter products by multiple criteria
+- 📈 **Reporting Dashboard** - Visualize sales & inventory data
+- 📱 **Mobile-Friendly** - Works flawlessly on all devices
 
-### 💰 Sales & Purchases
+## 🔥 Tech Stack
 
-- 🛒 Sales (Record customer orders & transactions)
-- 🛒 Purchases (Track supplier orders & inventory restocking)
-
-## 🛠️ Tech Stack
-
-### Backend
+### 🏗️ Backend
 
 - 🐍 **Python:** Programming language.
 - 🎯 **Django:** Web framework.
 - 🔄 **Django REST Framework (DRF):** For building RESTful APIs.
 - 🔐 **JWT Authentication:** Secure user authentication.
 
-### Frontend
+### 🎨 Frontend
 
 - ⚡ **Vite:** Fast build tool for React.
 - ⚛️ **React:** JavaScript library for building user interfaces.
 - 🎨 **Tailwind CSS:** Utility-first CSS framework for styling.
 - 🔄 **Axios:** For making HTTP requests to the backend.
 
-## 🚀 Getting Started
+## 🚀 Quick Start
 
-### Prerequisites
+### 📋 Prerequisites
 
-- Python 3.x
-- Node.js
-- npm or yarn
+- Python 3.10+
+- Node.js 16+
+- PostgreSQL 12+
 
 ## Backend Setup
 
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/kevinThulnith/django-vite-react-tailwind-project.git
+git clone https://github.com/kevinThulnith/Inventory-Management-System.git
 ```
 
 2. Create a virtual environment:
@@ -122,7 +124,7 @@ npm run dev
 
 ➡️ Frontend runs at `http://localhost:3000`
 
-## To Host on Local Network
+## 🌐 To Host on Local Network
 
 1. Get device **Ip** address
 
@@ -195,22 +197,23 @@ The backend provides a RESTful API using Django REST Framework. You can access t
 - `/api/token/` (POST) - Obtain JWT token
 - `/api/token/refresh/` (POST) - Refresh JWT token
 
-## 🌟 Why This Project?
+## 💡 Why Choose This Project?
 
-- ✔ Modern Stack – Combines Django’s robustness with React’s flexibility.
-- ✔ Scalable – Modular backend & reusable frontend components.
-- ✔ Responsive UI – Tailwind CSS ensures a sleek experience.
-- ✔ RESTful API – Clean, well-structured endpoints.
+- 🚀 Modern Stack - Cutting-edge technologies
+- 📈 Scalable Architecture - Ready for growth
+- 🎨 Beautiful UI - Tailwind-powered design
+- 🔄 Real-Time Updates - Instant data reflection
+- 📱 Mobile-Ready - Perfect for all devices
 
 ## 🤝 Contributing
 
-PRs are welcome!
+We ❤️ contributions! Here's how:
 
-- Fork the repo
-- Create a branch (`git checkout -b feature/awesome-feature`)
-- Commit changes (`git commit -m "Add awesome feature"`)
-- Push (`git push origin feature/awesome-feature`)
-- Open a PR
+1. 🍴 Fork the repository
+2. 🌿 Create a branch (git checkout -b feature/amazing-feature)
+3. 💾 Commit changes (git commit -m 'Add amazing feature')
+4. 📤 Push to branch (git push origin feature/amazing-feature)
+5. 🔀 Open a Pull Request
 
 ## Show Your Support: ❤️
 
