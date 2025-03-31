@@ -27,11 +27,10 @@ function Supplier() {
     email: "",
     address: "",
   };
-
-  const [formData, setFormData] = useState(initialFormState);
   const [suppliers, setSuppliers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [formData, setFormData] = useState(initialFormState);
   const [currentSupplierId, setCurrentSupplierId] = useState(null);
 
   const getSuppliers = useCallback(async () => {
