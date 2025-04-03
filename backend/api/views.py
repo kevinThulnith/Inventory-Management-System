@@ -5,8 +5,6 @@ from rest_framework.response import Response
 from django.contrib.auth.models import User
 from rest_framework.views import APIView
 from rest_framework import generics
-from django.db.models.signals import post_save, pre_delete
-from django.dispatch import receiver
 
 # !User views
 
