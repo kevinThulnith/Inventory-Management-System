@@ -55,6 +55,7 @@ function Login() {
         localStorage.setItem(ACCESS_TOKEN, res.data.access);
         localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
         navigate("/");
+        window.location.reload();
       })
       .catch((error) => alert(error.response?.data?.detail || "Login failed"))
       .finally(() => setLoading(false));
