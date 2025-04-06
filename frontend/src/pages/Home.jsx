@@ -48,12 +48,6 @@ function Home() {
   const [sales, setSales] = useState([]);
   const [purchases, setPurchases] = useState([]);
 
-  // TODO: Refresh the page when the page is loaded for the first time
-  if (!localStorage.getItem("refreshed")) {
-    localStorage.setItem("refreshed", "true");
-    window.location.reload();
-  }
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -129,8 +123,8 @@ function Home() {
   return (
     <motion.div
       className="p-4 ss:p-6 grid grid-cols-1 ss:grid-cols-2 ms:grid-cols-3 gap-4 ss:gap-6 
-                 bg-gray-100 shadow-xl rounded-2xl w-[360px] ps:w-[360px] xs:w-[500px] ss:w-[650px] 
-                 ms:w-[900px] mx-auto overflow-y-auto ss:h-full h-[650px]"
+                   bg-gray-100 shadow-xl rounded-2xl w-[360px] ps:w-[360px] xs:w-[500px] ss:w-[650px] 
+                   ms:w-[900px] mx-auto overflow-y-auto ss:h-full h-[650px]"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
@@ -139,7 +133,7 @@ function Home() {
         <motion.div
           key={section.title}
           className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg 
-                     transition-shadow duration-300"
+                       transition-shadow duration-300"
           variants={sectionVariants}
         >
           <div className="p-3 ss:p-5">
@@ -157,7 +151,7 @@ function Home() {
                 <motion.li
                   key={item.id}
                   className="text-sm ss:text-base text-gray-700 py-1.5 ss:py-2 px-2 ss:px-3 
-                           hover:bg-gray-50 rounded-md transition-colors duration-200"
+                             hover:bg-gray-50 rounded-md transition-colors duration-200"
                   variants={itemVariants}
                   whileHover="hover"
                 >
@@ -178,7 +172,7 @@ function Home() {
                 <Link
                   to={section.link}
                   className="inline-flex items-center text-xs ss:text-sm text-blue-600 
-                           hover:text-blue-800 font-medium transition-colors duration-200"
+                             hover:text-blue-800 font-medium transition-colors duration-200"
                 >
                   View All
                   <FaAnglesRight className="ml-1 text-xs ss:text-sm" />

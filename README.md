@@ -22,6 +22,7 @@
 - 👤 **User Registration** - Create new accounts with validation
 - 🔑 **JWT Authentication** - Secure login/logout system
 - 🛡️ **Role-Based Access** - Protected routes & endpoints
+- 🔒 **CSRF Protection** - Enhanced security against Cross-Site Request Forgery attacks
 
 ### 📦 Product Management
 
@@ -40,6 +41,13 @@
 - 🔍 **Powerful Search** - Filter products by multiple criteria
 - 📈 **Reporting Dashboard** - Visualize sales & inventory data
 - 📱 **Mobile-Friendly** - Works flawlessly on all devices
+
+### 🎯 Performance & SEO
+
+- 📱 **Mobile-First Design** - Optimized for all devices
+- 🚀 **SEO Optimized** - Enhanced meta tags and semantic HTML
+- 📊 **Performance Metrics** - Optimized loading times and Core Web Vitals
+- 🔍 **Search Engine Friendly** - Improved crawlability and indexing
 
 ## 🔥 Tech Stack
 
@@ -196,6 +204,62 @@ The backend provides a RESTful API using Django REST Framework. You can access t
 - `/api/purchases/` (GET, POST, PUT, DELETE)
 - `/api/token/` (POST) - Obtain JWT token
 - `/api/token/refresh/` (POST) - Refresh JWT token
+
+### Security Headers
+
+```http
+X-CSRFToken: <csrf-token>
+Authorization: Bearer <jwt-token>
+```
+
+## 🚀 Configuration Steps
+
+### CSRF Setup
+
+1. Include CSRF token in HTML template:
+
+```html
+<meta name="csrf-token" content="{{ csrf_token }}" />
+```
+
+2. Add to API requests:
+
+```javascript
+axios.defaults.headers.common["X-CSRFToken"] = getCookie("csrftoken");
+```
+
+### SEO Configuration
+
+1. Update meta tags in `index.html`:
+
+```html
+<meta name="description" content="Your description" />
+<meta name="keywords" content="inventory, management, system" />
+```
+
+2. Configure social media tags:
+
+```html
+<meta property="og:title" content="Your Title" />
+<meta property="og:description" content="Your Description" />
+```
+
+## 🛡️ Security Features
+
+### CSRF Protection
+
+- Django's built-in CSRF middleware for form protection
+- Custom CSRF token handling for API requests
+- Secure cookie handling and validation
+- Protection against cross-site request forgery attacks
+
+### SEO Implementation
+
+- Custom meta tags for better search engine visibility
+- OpenGraph and Twitter Card meta tags for social sharing
+- Semantic HTML structure for better accessibility
+- Optimized page titles and descriptions
+- Mobile-friendly responsive design
 
 ## 💡 Why Choose This Project?
 
