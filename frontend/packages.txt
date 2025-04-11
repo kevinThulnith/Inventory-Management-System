@@ -1,24 +1,23 @@
-frontend@0.0.0 E:\Web Projects\DVRT Project\frontend
-Γö£ΓöÇΓöÇ @eslint/js@9.17.0
-Γö£ΓöÇΓöÇ @fortawesome/fontawesome-svg-core@6.7.2
-Γö£ΓöÇΓöÇ @fortawesome/free-solid-svg-icons@6.7.2
-Γö£ΓöÇΓöÇ @fortawesome/react-fontawesome@0.2.2
-Γö£ΓöÇΓöÇ @types/react-dom@18.3.5
-Γö£ΓöÇΓöÇ @types/react@18.3.18
+frontend@0.0.0 E:\Web Projects\IMS 3.0\frontend
+Γö£ΓöÇΓöÇ @eslint/js@9.21.0
+Γö£ΓöÇΓöÇ @types/react-dom@19.0.4
+Γö£ΓöÇΓöÇ @types/react@19.0.10
+Γö£ΓöÇΓöÇ @vitejs/plugin-react-swc@3.8.0
 Γö£ΓöÇΓöÇ @vitejs/plugin-react@4.3.4
 Γö£ΓöÇΓöÇ autoprefixer@10.4.20
-Γö£ΓöÇΓöÇ axios@1.7.9
-Γö£ΓöÇΓöÇ eslint-plugin-react-hooks@5.1.0
-Γö£ΓöÇΓöÇ eslint-plugin-react-refresh@0.4.16
-Γö£ΓöÇΓöÇ eslint-plugin-react@7.37.3
-Γö£ΓöÇΓöÇ eslint@9.17.0
-Γö£ΓöÇΓöÇ globals@15.14.0
+Γö£ΓöÇΓöÇ axios@1.8.2
+Γö£ΓöÇΓöÇ eslint-plugin-react-hooks@5.2.0
+Γö£ΓöÇΓöÇ eslint-plugin-react-refresh@0.4.19
+Γö£ΓöÇΓöÇ eslint-plugin-react@7.37.4
+Γö£ΓöÇΓöÇ eslint@9.21.0
+Γö£ΓöÇΓöÇ framer-motion@12.5.0
+Γö£ΓöÇΓöÇ globals@15.15.0
 Γö£ΓöÇΓöÇ jwt-decode@4.0.0
-Γö£ΓöÇΓöÇ lucide-react@0.469.0
-Γö£ΓöÇΓöÇ postcss@8.4.49
-Γö£ΓöÇΓöÇ react-dom@18.3.1
-Γö£ΓöÇΓöÇ react-router-dom@7.1.5
-Γö£ΓöÇΓöÇ react@18.3.1
+Γö£ΓöÇΓöÇ lucide-react@0.479.0
+Γö£ΓöÇΓöÇ postcss@8.5.3
+Γö£ΓöÇΓöÇ react-dom@19.0.0
+Γö£ΓöÇΓöÇ react-icons@5.5.0
+Γö£ΓöÇΓöÇ react-router-dom@7.3.0
+Γö£ΓöÇΓöÇ react@19.0.0
 Γö£ΓöÇΓöÇ tailwindcss@3.4.17
-ΓööΓöÇΓöÇ vite@6.0.7
-
+ΓööΓöÇΓöÇ vite@6.2.1
