@@ -57,7 +57,10 @@ function Login() {
         navigate("/");
         window.location.reload();
       })
-      .catch((error) => alert(error.response?.data?.detail || "Login failed"))
+      .catch((error) => {
+        if (error.response && error.response.status === 401) alert("Invalid username or password. Please try again.");
+        else alert("An error occurred. Please try again later.");
+      })
       .finally(() => setLoading(false));
   };
 
