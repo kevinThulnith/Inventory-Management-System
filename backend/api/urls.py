@@ -4,8 +4,8 @@ from . import views
 # !API urls
 urlpatterns = [
   # Category urls
-  path('categories/', views.CatagoryListCreateView.as_view(), name='category-lc'),
-  path('categories/<int:pk>/', views.CatagoryRetrieveUpdateDestroyView.as_view() , name='category-rud'),
+  path('categories/', views.CategoryListCreateView.as_view(), name='category-lc'),
+  path('categories/<int:pk>/', views.CategoryRetrieveUpdateDestroyView.as_view() , name='category-rud'),
   # Supplier urls
   path('suppliers/', views.SupplierListCreateView.as_view(), name='supplier-lc'),
   path('suppliers/<int:pk>/', views.SupplierRetrieveUpdateDestroyView.as_view(), name='supplier-rud'),

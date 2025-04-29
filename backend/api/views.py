@@ -26,12 +26,12 @@ class UserInfoView(APIView):
 # !Category views
 
 # TODO: Create | Update | Delete | Get Category
-class CatagoryListCreateView(generics.ListCreateAPIView):
+class CategoryListCreateView(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [IsAuthenticated]
     
-class CatagoryRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+class CategoryRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [IsAuthenticated]
