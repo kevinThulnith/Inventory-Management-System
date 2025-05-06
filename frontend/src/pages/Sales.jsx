@@ -135,7 +135,7 @@ function Sales() {
           onSubmit={handleSubmit}
           variants={animations.item}
         >
-          <div>
+          <motion.div variants={animations.item}>
             <label
               htmlFor="customer"
               className="block text-sm font-medium text-gray-600"
@@ -168,9 +168,9 @@ function Sales() {
                 <FaChevronDown />
               </div>
             </div>
-          </div>
+          </motion.div>
           <h3 className="block text-sm font-medium text-gray-600">
-            Selected Procucts
+            Selected Products
           </h3>
           <div style={{ overflowX: "auto" }}>
             <div className="bg-gray-100 w-[520px] h-[250px] overflow-x-auto rounded-lg p-3">
@@ -242,7 +242,10 @@ function Sales() {
           View Sales <IoMdList />
         </h2>
         <motion.div style={{ overflowX: "auto" }} variants={animations.item}>
-          <div className="bg-slate-100 mt-3 rounded-xl mx-auto w-[540px] h-[590px]">
+          <motion.div
+            className="bg-slate-100 mt-3 rounded-xl mx-auto w-[540px] h-[590px]"
+            variants={animations.item}
+          >
             <div className="bg-blue-600 w-full h-[45px] rounded-t-xl flex columns-4">
               <div className="flex-[0.5] text-white text-center pt-3 border-r-2 border-white font-semibold">
                 Id
@@ -258,12 +261,15 @@ function Sales() {
               </div>
             </div>
             <div className="w-full h-[544px] rounded-b-xl overflow-x-auto">
-              {sales.map((sale) => (
-                <div
+              {sales.map((sale, index) => (
+                <motion.div
                   key={sale.id}
                   className={`${
                     sale.id !== 1 ? "border-t-2 border-gray-300" : ""
                   } flex columns-4 h-[45px] w-full`}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
                 >
                   <div className="flex-[0.5] text-gray-700 text-center pt-2 border-r-2 border-gray-300">
                     {sale.id}
@@ -277,10 +283,10 @@ function Sales() {
                   <div className="flex-1 text-gray-700 text-center pt-2">
                     {sale.total}
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </motion.div>
       {loading && <LoadingIndicator />}

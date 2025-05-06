@@ -56,14 +56,13 @@ function Supplier() {
     setLoading(true);
 
     try {
-      if (isUpdating) {
-        await api.put(`api/suppliers/${currentSupplierId}/`, formData);
-        alert("Supplier updated successfully!");
-      } else {
-        await api.post("api/suppliers/", formData);
-        alert("Supplier added successfully!");
-      }
-      await getSuppliers();
+      const method = isUpdating ? "put" : "post";
+      const url = isUpdating
+        ? `api/suppliers/${currentSupplierId}/`
+        : "api/suppliers/";
+      await api[method](url, formData);
+      alert(`Supplier ${isUpdating ? "updated" : "added"} successfully!`);
+      getSuppliers();
       handleCancel();
     } catch {
       alert(`Failed to ${isUpdating ? "update" : "add"} supplier!`);
@@ -87,11 +86,11 @@ function Supplier() {
     [suppliers]
   );
 
-  const handleCancel = useCallback(() => {
+  const handleCancel = () => {
     setFormData(initialFormState);
     setCurrentSupplierId(null);
     setIsUpdating(false);
-  }, []);
+  };
 
   const renderFormFields = () =>
     formFields.map(({ id, label, type, pattern }) => (
@@ -149,8 +148,6 @@ function Supplier() {
             <motion.button
               type="submit"
               className="font-medium mt-2 px-4 py-2 text-slate-100 bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
             >
               {isUpdating ? "Update Supplier" : "Add Supplier"}
             </motion.button>
@@ -159,8 +156,6 @@ function Supplier() {
                 type="button"
                 onClick={handleCancel}
                 className="font-medium mt-2 px-4 py-2 text-slate-100 bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
               >
                 Cancel
               </motion.button>
@@ -206,7 +201,6 @@ function Supplier() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  whileHover={{ backgroundColor: "#f8fafc" }}
                 >
                   <div className="flex-[0.5] text-gray-700 text-center pt-2 border-r-2 border-gray-300">
                     {supplier.id}
@@ -221,7 +215,6 @@ function Supplier() {
                     {supplier.phone}
                     <motion.button
                       onClick={() => handleUpdate(supplier.id)}
-                      whileHover={{ scale: 1.2 }}
                       whileTap={{ scale: 0.9 }}
                     >
                       <FaAnglesRight className="ml-3 text-xl" />

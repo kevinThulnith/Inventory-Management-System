@@ -57,14 +57,13 @@ function Customer() {
     setLoading(true);
 
     try {
-      if (isUpdating) {
-        await api.put(`api/customers/${currentCustomerId}/`, formData);
-        alert("Customer updated successfully!");
-      } else {
-        await api.post("api/customers/", formData);
-        alert("Customer added successfully!");
-      }
-      await getCustomers();
+      const method = isUpdating ? "put" : "post";
+      const url = isUpdating
+        ? `api/customers/${currentCustomerId}/`
+        : "api/customers/";
+      await api[method](url, formData);
+      alert(`Customer ${isUpdating ? "updated" : "added"} successfully!`);
+      getCustomers();
       handleCancel();
     } catch {
       alert(`Failed to ${isUpdating ? "update" : "add"} customer!`);
@@ -88,11 +87,11 @@ function Customer() {
     [customers]
   );
 
-  const handleCancel = useCallback(() => {
+  const handleCancel = () => {
     setFormData(initialFormState);
     setCurrentCustomerId(null);
     setIsUpdating(false);
-  }, []);
+  };
 
   const renderFormFields = () =>
     formFields.map(({ id, label, type, pattern }) => (
@@ -122,6 +121,7 @@ function Customer() {
       animate="visible"
       variants={animations.container}
     >
+      {/* Page form */}
       <motion.div className="flex-1" variants={animations.item}>
         <motion.h2
           className="ss:text-3xl text-2xl font-semibold text-gray-500 ms:p-3 flex items-center gap-3"
@@ -150,8 +150,6 @@ function Customer() {
             <motion.button
               type="submit"
               className="font-medium mt-2 px-4 py-2 text-slate-100 bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
             >
               {isUpdating ? "Update Customer" : "Add Customer"}
             </motion.button>
@@ -160,8 +158,6 @@ function Customer() {
                 type="button"
                 onClick={handleCancel}
                 className="font-medium mt-2 px-4 py-2 text-slate-100 bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
               >
                 Cancel
               </motion.button>
@@ -170,6 +166,7 @@ function Customer() {
         </motion.form>
       </motion.div>
 
+      {/* Customers list */}
       <motion.div className="flex-1" variants={animations.item}>
         <motion.h2
           className="ss:text-3xl text-2xl font-semibold text-gray-500 ms:p-3 flex items-center gap-3"
@@ -207,7 +204,6 @@ function Customer() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  whileHover={{ backgroundColor: "#f8fafc" }}
                 >
                   <div className="flex-[0.5] text-gray-700 text-center pt-2 border-r-2 border-gray-300">
                     {customer.id}
@@ -222,7 +218,6 @@ function Customer() {
                     {customer.phone}
                     <motion.button
                       onClick={() => handleUpdate(customer.id)}
-                      whileHover={{ scale: 1.2 }}
                       whileTap={{ scale: 0.9 }}
                     >
                       <FaAnglesRight className="ml-3 text-xl" />

@@ -39,14 +39,13 @@ function Category() {
     setLoading(true);
 
     try {
-      if (isUpdating) {
-        await api.put(`api/categories/${currentCategoryId}/`, formData);
-        alert("Category updated successfully!");
-      } else {
-        await api.post("api/categories/", formData);
-        alert("Category added successfully!");
-      }
-      await getCategories();
+      const method = isUpdating ? "put" : "post";
+      const url = isUpdating
+        ? `api/categories/${currentCategoryId}/`
+        : "api/categories/";
+      await api[method](url, formData);
+      alert(`Category ${isUpdating ? "updated" : "added"} successfully!`);
+      getCategories();
       handleCancel();
     } catch {
       alert(`Failed to ${isUpdating ? "update" : "add"} category!`);
@@ -67,11 +66,11 @@ function Category() {
     [categories]
   );
 
-  const handleCancel = useCallback(() => {
+  const handleCancel = () => {
     setFormData({ name: "" });
     setCurrentCategoryId(null);
     setIsUpdating(false);
-  }, []);
+  };
 
   return (
     <motion.div
@@ -114,9 +113,7 @@ function Category() {
           >
             <motion.button
               type="submit"
-              className="font-medium mt-3 ss:px-4 py-2 px-4 text-slate-100 bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none flex items-center gap-1"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="font-medium mt-3 ss:px-4 py-2 px-4 text-slate-100 bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none flex items-center gap-1 duration-100 ease-in-out"
             >
               {isUpdating ? "Update" : "Add Category"}
               {isUpdating ? "" : <FaPlus className="ml-2" />}
@@ -125,9 +122,7 @@ function Category() {
               <motion.button
                 type="button"
                 onClick={handleCancel}
-                className="font-medium mt-3 px-4 text-slate-100 bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                className="font-medium mt-3 px-4 text-slate-100 bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none duration-100 ease-in-out"
               >
                 Cancel
               </motion.button>
@@ -169,7 +164,6 @@ function Category() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  whileHover={{ backgroundColor: "#f8fafc" }}
                 >
                   <div className="text-gray-700 text-center flex-1 pt-2 pl-2 border-r-2 border-gray-300">
                     {category.id}
@@ -181,7 +175,6 @@ function Category() {
                     {category.product_count}
                     <motion.button
                       onClick={() => handleUpdate(category.id)}
-                      whileHover={{ scale: 1.2 }}
                       whileTap={{ scale: 0.9 }}
                     >
                       <FaAnglesRight className="ml-3 text-xl" />

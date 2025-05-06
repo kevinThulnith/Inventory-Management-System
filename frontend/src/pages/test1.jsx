@@ -1,40 +1,36 @@
 import LoadingIndicator from "../components/LoadingIndicator";
-import { useState, useEffect, useCallback } from "react";
 import animations from "../components/animation";
 import { FaAnglesRight } from "react-icons/fa6";
 import { AiFillProduct } from "react-icons/ai";
 import { FaChevronDown } from "react-icons/fa";
+import { useState, useEffect } from "react";
 import { IoMdList } from "react-icons/io";
 import { RxUpdate } from "react-icons/rx";
 import { motion } from "framer-motion";
 import api from "../api";
 
-const initialFormState = {
-  name: "",
-  costPrice: "",
-  sellingPrice: "",
-  description: "",
-  stockQuantity: "",
-  productCategory: "",
-  is_active: true,
-};
-
 function Product() {
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [costPrice, setCostPrice] = useState("");
+  const [isActive, setIsActive] = useState(true);
   const [categories, setCategories] = useState([]);
+  const [description, setDescription] = useState("");
   const [isUpdating, setIsUpdating] = useState(false);
-  const [formData, setFormData] = useState(initialFormState);
+  const [sellingPrice, setSellingPrice] = useState("");
+  const [stockQuantity, setStockQuantity] = useState("");
   const [currentProductId, setCurrentProductId] = useState(null);
 
-  const getProducts = useCallback(async () => {
+  const getProducts = () => {
     setLoading(true);
     api
       .get("api/products/all/")
       .then((res) => setProducts(res.data))
       .catch(() => alert("Failed to fetch products!"))
       .finally(() => setLoading(false));
-  }, []);
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -43,59 +39,80 @@ function Product() {
       .then((res) => setCategories(res.data))
       .catch(() => alert("Failed to fetch categories!"))
       .finally(() => setLoading(false));
-    getProducts();
-  }, [getProducts]);
 
-  const handleCancel = useCallback(() => {
-    setFormData(initialFormState);
+    getProducts();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    setLoading(true);
+    e.preventDefault();
+
+    const productData = {
+      name,
+      costPrice,
+      sellingPrice,
+      description,
+      stockQuantity,
+      productCategory: category,
+      is_active: isActive,
+    };
+
+    if (isUpdating) {
+      api
+        .put(`api/products/${currentProductId}/`, productData)
+        .then(() => {
+          alert("Product updated successfully!");
+          getProducts();
+          handleCancel();
+        })
+        .catch(() => alert("Failed to update product!"))
+        .finally(() => setLoading(false));
+    } else {
+      api
+        .post("api/products/", productData)
+        .then(() => {
+          alert("Product added successfully!");
+          getProducts();
+          handleCancel();
+        })
+        .catch(() => alert("Failed to add product!"))
+        .finally(() => setLoading(false));
+    }
+  };
+
+  const handleUpdate = (id) => {
+    const product = products.find((product) => product.id === id);
+    if (product) {
+      setName(product.name);
+      setCostPrice(product.costPrice);
+      setSellingPrice(product.sellingPrice);
+      setDescription(product.description);
+      setStockQuantity(product.stockQuantity);
+      setCategory(product.productCategory);
+      setIsActive(product.is_active);
+      setCurrentProductId(id);
+      setIsUpdating(true);
+    }
+
+    const containerElement = document.getElementById("container");
+    containerElement?.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleCancel = () => {
+    setName("");
+    setCostPrice("");
+    setSellingPrice("");
+    setDescription("");
+    setStockQuantity("");
+    setCategory("");
+    setIsActive(true);
     setCurrentProductId(null);
     setIsUpdating(false);
-  }, []);
+  };
 
-  const handleChange = useCallback((e) => {
-    const { id, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [id]: value,
-    }));
-  }, []);
-
-  const handleSubmit = useCallback(
-    async (e) => {
-      e.preventDefault();
-      setLoading(true);
-      try {
-        const method = isUpdating ? "put" : "post";
-        const url = isUpdating
-          ? `api/products/${currentProductId}/`
-          : "api/products/";
-        await api[method](url, formData);
-        alert(`Product ${isUpdating ? "updated" : "added"} successfully!`);
-        await getProducts();
-        handleCancel();
-      } catch {
-        alert(`Failed to ${isUpdating ? "update" : "add"} product!`);
-      } finally {
-        setLoading(false);
-      }
-    },
-    [formData, isUpdating, currentProductId, getProducts, handleCancel]
-  );
-
-  const handleUpdate = useCallback(
-    (id) => {
-      const product = products.find((p) => p.id === id);
-      if (product) {
-        setFormData(product);
-        setCurrentProductId(id);
-        setIsUpdating(true);
-
-        const containerElement = document.getElementById("container");
-        containerElement?.scrollTo({ top: 0, behavior: "smooth" });
-      }
-    },
-    [products]
-  );
+  const handleChange = (e) => {
+    setIsActive(e.target.value === "true");
+  };
 
   return (
     <motion.div
@@ -105,7 +122,6 @@ function Product() {
       animate="visible"
       variants={animations.container}
     >
-      {/* Page form */}
       <motion.div className="flex-1" variants={animations.item}>
         <motion.h2
           className="ss:text-3xl text-2xl font-semibold text-gray-500 ms:p-3 flex items-center gap-3"
@@ -138,9 +154,9 @@ function Product() {
               id="name"
               type="text"
               placeholder="Enter product name"
-              value={formData.name}
-              onChange={handleChange}
-              className="mt-3 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="mt-3 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none"
             />
           </motion.div>
           <div className="ss:flex ss:col-span-2 ss:gap-4">
@@ -158,9 +174,9 @@ function Product() {
                 placeholder="Enter cost price"
                 pattern="[0-9]+(\.[0-9][0-9]?)?"
                 title="Enter numbers only (e.g., 123 or 123.45)"
-                value={formData.costPrice}
-                onChange={handleChange}
-                className="mt-3 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={costPrice}
+                onChange={(e) => setCostPrice(e.target.value)}
+                className="mt-3 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none"
               />
             </motion.div>
             <motion.div variants={animations.item}>
@@ -177,9 +193,9 @@ function Product() {
                 placeholder="Enter selling price"
                 pattern="[0-9]+(\.[0-9][0-9]?)?"
                 title="Enter numbers only (e.g., 123 or 123.45)"
-                value={formData.sellingPrice}
-                onChange={handleChange}
-                className="mt-3 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                value={sellingPrice}
+                onChange={(e) => setSellingPrice(e.target.value)}
+                className="mt-3 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none"
               />
             </motion.div>
           </div>
@@ -196,8 +212,8 @@ function Product() {
               id="description"
               className="resize-none mt-3 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none"
               placeholder="Enter product description"
-              value={formData.description}
-              onChange={handleChange}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             ></textarea>
           </motion.div>
           <motion.div variants={animations.item}>
@@ -214,9 +230,9 @@ function Product() {
               pattern="[0-9]+"
               title="Enter numbers only (e.g., 123)"
               placeholder="Enter stock quantity"
-              value={formData.stockQuantity}
-              onChange={handleChange}
-              className="mt-3 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              value={stockQuantity}
+              onChange={(e) => setStockQuantity(e.target.value)}
+              className="mt-3 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none"
             />
           </motion.div>
           <div
@@ -234,9 +250,9 @@ function Product() {
               <div className="relative">
                 <select
                   required
-                  id="productCategory"
-                  value={formData.productCategory}
-                  onChange={handleChange}
+                  id="category"
+                  value={category}
+                  onChange={(e) => setCategory(e.target.value)}
                   className="mt-3 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm bg-white focus:outline-none appearance-none pr-8 cursor-pointer"
                   style={{ backgroundPosition: "right 12px center" }}
                 >
@@ -269,7 +285,7 @@ function Product() {
                       type="radio"
                       name="is_active"
                       value="true"
-                      checked={formData.is_active === true}
+                      checked={isActive === true}
                       onChange={handleChange}
                       className="form-radio"
                     />
@@ -280,7 +296,7 @@ function Product() {
                       type="radio"
                       name="is_active"
                       value="false"
-                      checked={formData.is_active === false}
+                      checked={isActive === false}
                       onChange={handleChange}
                       className="form-radio"
                     />
@@ -309,8 +325,6 @@ function Product() {
           </div>
         </motion.form>
       </motion.div>
-
-      {/* Products list */}
       <motion.div className="flex-1" variants={animations.item}>
         <motion.h2
           className="ss:text-3xl text-2xl font-semibold text-gray-500 ms:p-3 flex items-center gap-3"
@@ -320,10 +334,7 @@ function Product() {
           <IoMdList className="ss:text-4xl text-3xl" />
         </motion.h2>
         <motion.div style={{ overflowX: "auto" }} variants={animations.item}>
-          <motion.div
-            className="bg-slate-100 mt-3 rounded-xl mx-auto w-[540px] h-[600px]"
-            variants={animations.item}
-          >
+          <div className="bg-slate-100 mt-3 rounded-xl mx-auto w-[540px] h-[600px]">
             <div className="bg-blue-600 w-full h-[45px] rounded-t-xl flex columns-4">
               <div className="flex-[0.5] text-white text-center pt-3 border-r-2 border-white font-semibold">
                 Id
@@ -339,15 +350,12 @@ function Product() {
               </div>
             </div>
             <div className="w-full h-[555px] rounded-b-xl overflow-x-auto">
-              {products.map((product, index) => (
-                <motion.div
+              {products.map((product) => (
+                <div
                   key={product.id}
                   className={`${
                     product.id !== 1 ? "border-t-2 border-gray-300" : ""
                   } flex columns-4 h-[45px] w-full`}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
                 >
                   <div className="flex-[0.5] text-gray-700 text-center pt-2 border-r-2 border-gray-300">
                     {product.id}
@@ -360,18 +368,14 @@ function Product() {
                   </div>
                   <div className="flex-[0.8] text-gray-700 text-center pt-2 flex items-center indent-4">
                     {product.stockQuantity}
-                    <motion.button
-                      onClick={() => handleUpdate(product.id)}
-                      whileTap={{ scale: 0.9 }}
-                      className="ml-2"
-                    >
+                    <button onClick={() => handleUpdate(product.id)}>
                       <FaAnglesRight className="ml-3 text-xl" />
-                    </motion.button>
+                    </button>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </motion.div>
       </motion.div>
       {loading && <LoadingIndicator />}
