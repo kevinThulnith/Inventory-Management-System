@@ -265,9 +265,8 @@ function Purchase() {
             <div className="w-full h-[544px] rounded-b-xl overflow-x-auto">
               {purchases.map((purchase, index) => (
                 <motion.div
-                  key={purchase.id}
                   className={`${
-                    purchase.id !== 1 ? "border-t-2 border-gray-300" : ""
+                    index !== 0 ? "border-t-2 border-gray-300" : ""
                   } flex columns-4 h-[45px] w-full`}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}

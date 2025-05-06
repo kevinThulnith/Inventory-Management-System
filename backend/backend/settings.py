@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-fnonu0))72jzo90+v)k(7o!qrse_e%^m3&7@e!obna9x=^x8@(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['*', '.vercel.app', '.now.sh']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.vercel.app', '.now.sh', 'https://inventory-management-system-wheat-one.vercel.app/', 'https://inventory-management-system-et5h.vercel.app/']
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
