@@ -1,7 +1,7 @@
 import LoadingIndicator from "../components/LoadingIndicator";
 import { useState, useEffect, useCallback } from "react";
+import { FaPlus, FaAnglesRight } from "react-icons/fa6";
 import animations from "../components/animation";
-import { FaAnglesRight } from "react-icons/fa6";
 import { BsPeopleFill } from "react-icons/bs";
 import { IoMdList } from "react-icons/io";
 import { RxUpdate } from "react-icons/rx";
@@ -150,13 +150,16 @@ function Customer() {
             <motion.button
               type="submit"
               className="font-medium mt-2 px-4 py-2 text-slate-100 bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none"
+              whileTap={{ scale: 0.9 }}
             >
               {isUpdating ? "Update Customer" : "Add Customer"}
+              {isUpdating ? "" : <FaPlus className="ml-2 inline-block" />}
             </motion.button>
             {isUpdating && (
               <motion.button
                 type="button"
                 onClick={handleCancel}
+                whileTap={{ scale: 0.9 }}
                 className="font-medium mt-2 px-4 py-2 text-slate-100 bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none"
               >
                 Cancel

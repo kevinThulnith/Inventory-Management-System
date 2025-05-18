@@ -1,6 +1,7 @@
 import LoadingIndicator from "../components/LoadingIndicator";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import { useNavigate, Link } from "react-router-dom";
+import { IoMdLogIn } from "react-icons/io";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import api from "../api";
@@ -58,7 +59,8 @@ function Login() {
         window.location.reload();
       })
       .catch((error) => {
-        if (error.response && error.response.status === 401) alert("Invalid username or password. Please try again.");
+        if (error.response && error.response.status === 401)
+          alert("Invalid username or password. Please try again.");
         else alert("An error occurred. Please try again later.");
       })
       .finally(() => setLoading(false));
@@ -76,6 +78,7 @@ function Login() {
         variants={sectionVariants}
       >
         Login
+        <IoMdLogIn className="inline-block text-5x ml-2" />
       </motion.h2>
 
       <form className="mt-10" onSubmit={handleSubmit}>

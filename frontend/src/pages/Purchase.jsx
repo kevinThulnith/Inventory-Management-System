@@ -231,12 +231,13 @@ function Purchase() {
               Add Product <FaPlus className="ml-2" />
             </button>
           </div>
-          <button
+          <motion.button
             type="submit"
+            whileTap={{ scale: 0.9 }}
             className="font-medium mt-2 px-4 py-2 text-slate-100 bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none"
           >
             Submit Purchase
-          </button>
+          </motion.button>
         </motion.form>
       </motion.div>
       <motion.div className="md:w-[550px]" variants={animations.item}>

@@ -113,6 +113,7 @@ function Category() {
           >
             <motion.button
               type="submit"
+              whileTap={{ scale: 0.9 }}
               className="font-medium mt-3 ss:px-4 py-2 px-4 text-slate-100 bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none flex items-center gap-1 duration-100 ease-in-out"
             >
               {isUpdating ? "Update" : "Add Category"}
@@ -122,6 +123,7 @@ function Category() {
               <motion.button
                 type="button"
                 onClick={handleCancel}
+                whileTap={{ scale: 0.9 }}
                 className="font-medium mt-3 px-4 text-slate-100 bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none duration-100 ease-in-out"
               >
                 Cancel

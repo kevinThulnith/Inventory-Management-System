@@ -1,7 +1,7 @@
 import LoadingIndicator from "../components/LoadingIndicator";
 import { useState, useEffect, useCallback } from "react";
+import { FaAnglesRight, FaPlus } from "react-icons/fa6";
 import animations from "../components/animation";
-import { FaAnglesRight } from "react-icons/fa6";
 import { AiFillProduct } from "react-icons/ai";
 import { FaChevronDown } from "react-icons/fa";
 import { IoMdList } from "react-icons/io";
@@ -291,20 +291,23 @@ function Product() {
             )}
           </div>
           <div className="flex gap-4">
-            <button
+            <motion.button
               type="submit"
+              whileTap={{ scale: 0.9 }}
               className="font-medium mt-2 px-4 py-2 text-slate-100 bg-blue-500 rounded-lg hover:bg-blue-600 focus:outline-none"
             >
               {isUpdating ? "Update Product" : "Add Product"}
-            </button>
+              {isUpdating ? "" : <FaPlus className="ml-2 inline-block" />}
+            </motion.button>
             {isUpdating && (
-              <button
+              <motion.button
                 type="button"
                 onClick={handleCancel}
+                whileTap={{ scale: 0.9 }}
                 className="font-medium mt-2 px-4 py-2 text-slate-100 bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none"
               >
                 Cancel
-              </button>
+              </motion.button>
             )}
           </div>
         </motion.form>
