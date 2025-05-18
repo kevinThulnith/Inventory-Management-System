@@ -78,7 +78,7 @@ function Login() {
         variants={sectionVariants}
       >
         Login
-        <IoMdLogIn className="inline-block text-5x ml-2" />
+        <IoMdLogIn className="inline-block text-5x ml-1" />
       </motion.h2>
 
       <form className="mt-10" onSubmit={handleSubmit}>
