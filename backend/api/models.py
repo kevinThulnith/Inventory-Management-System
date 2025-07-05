@@ -68,10 +68,19 @@ class SaleItem(models.Model):
         "Automatically set the price based on the product's selling price if not provided and update stock quantity and sale total"
         if not self.price:
             self.price = self.product.sellingPrice
+            
+        if self.quantity <= 0:
+            raise ValueError("Quantity must be greater than zero.")
+        
+        if self.product.stockQuantity < self.quantity:
+            raise ValueError("Insufficient stock for this product.")
+        
         super().save(*args, **kwargs)
+        
         # !Update the product's stock quantity
         self.product.stockQuantity -= self.quantity
         self.product.save()
+        
         # !Update the sale's total
         self.sale.total += self.quantity * self.price
         self.sale.save()
@@ -99,10 +108,19 @@ class PurchaseItem(models.Model):
         "Automatically set the price based on the product's selling price if not provided and update stock quantity and purchase total"
         if not self.price:
             self.price = self.product.costPrice
+        
+        if self.quantity <= 0:
+            raise ValueError("Quantity must be greater than zero.")
+        
+        if self.product.stockQuantity < 0:
+            raise ValueError("Insufficient stock for this product.")
+        
         super().save(*args, **kwargs)
+        
         # !Update the product's stock quantity
         self.product.stockQuantity += self.quantity
         self.product.save()
+        
         # !Update the purchase's total
         self.purchase.total += self.quantity * self.price
         self.purchase.save()

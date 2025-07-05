@@ -3,11 +3,13 @@
 ![DRF](https://img.shields.io/badge/Django_REST-FF1709?logo=django&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-000000?logo=JSON%20web%20tokens)
 [![Postgres](https://img.shields.io/badge/Postgres-%23316192.svg?logo=postgresql&logoColor=white)](#)
+[![Vercel](https://img.shields.io/badge/Railway-131415?logo=railway&logoColor=white)](#)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=fff)](#)
 [![React](https://img.shields.io/badge/React-%2320232a.svg?logo=react&logoColor=%2361DAFB)](#)
-![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white)
 ![Axios](https://img.shields.io/badge/Axios-5A29E4?logo=axios&logoColor=white)
+![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=white)
 [![NodeJS](https://img.shields.io/badge/Node.js-6DA55F?logo=node.js&logoColor=white)](#)
+[![Railway](https://img.shields.io/badge/Vercel-000000?logo=vercel&logoColor=white)](#)
 
 # 🚀 Inventory Management System
 
